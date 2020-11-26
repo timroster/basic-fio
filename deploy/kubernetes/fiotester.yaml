@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: fiotest-pod
+spec:
+  volumes:
+  - name: fiotest-pv-storage
+    persistentVolumeClaim:
+      claimName: fiotest-pv-claim
+#    hostPath:
+#      path: /mnt/local-storage/ssd/disk1
+  containers:
+    - name: fiotest-container
+      image: "quay.io/timro/fiotest:4GB-randrw"
+      volumeMounts:
+        - mountPath: "/data"
+          name: fiotest-pv-storage
+      env:
+      - name: "COBOL_STILL_EXISTS"
+        value: 1 
