@@ -17,4 +17,4 @@ spec:
           name: fiotest-pv-storage
       env:
       - name: "COBOL_STILL_EXISTS"
-        value: 1 
+        value: "1"
