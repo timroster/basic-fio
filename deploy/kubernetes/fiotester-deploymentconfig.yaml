@@ -1,0 +1,33 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: fiotest
+    app.kubernetes.io/component: fiotest
+    app.kubernetes.io/instance: fiotest
+  name: fiotest
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: fiotest
+  template:
+    metadata:
+      labels:
+        deploymentconfig: fiotest
+    spec:
+      containers:
+      - env:
+        - name: COBOL_STILL_EXISTS
+          value: "1"
+        image: quay.io/timro/fiotest:4GB-randrw
+        imagePullPolicy: IfNotPresent
+        name: fiotest
+        resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: fiotest-volume
+      securityContext: {}
+      volumes:
+      - name: fiotest-volume
+        persistentVolumeClaim:
+          claimName: fiotest-pv-claim

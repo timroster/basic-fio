@@ -3,9 +3,9 @@ apiVersion: v1
 metadata:
   name: fiotest-pv-claim
 spec:
-#  storageClassName: ibmc-file-gold
+  storageClassName: ibmc-block-gold
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 100Gi
